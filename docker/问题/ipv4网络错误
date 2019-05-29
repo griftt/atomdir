@@ -1,0 +1,5 @@
+###启动docker容器报错： IPv4 forwarding is disabled. Networking will not work
+1.原因：
+
+2.处理方法：
+(1)
