@@ -1,0 +1,2 @@
+java -version
+java -verbose :查看安装目录
