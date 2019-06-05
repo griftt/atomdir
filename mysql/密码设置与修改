@@ -1,0 +1,32 @@
+方法1：用SET PASSWORD命令，具体更新密码步骤如下：
+
+c:>mysql -u root
+
+mysql>set password for 'root'@'localhost'=password('newpasswd');
+
+mysql>set password for 'root'@'%'=password('newpasswd'); //本条可选
+通过以上设置，root的密码将变为newpasswd这样就完成了根用户root密码的设置工作。
+方法2：用mysqladmin
+1
+mysqladmin -u root password "newpass"
+如果root已经设置过密码，采用如下方法
+1
+mysqladmin -u root password oldpass "newpass"
+方法3： 用UPDATE直接编辑user表
+
+mysql -u root
+
+　　mysql> use mysql;
+
+　　mysql> UPDATE user SET Password = PASSWORD('newpass') WHERE user = 'root';
+
+　　mysql> FLUSH PRIVILEGES;
+在丢失root密码的时候，可以这样
+
+mysqld_safe --skip-grant-tables&
+
+　　mysql -u root mysql
+
+　　mysql> UPDATE user SET password=PASSWORD("new password") WHERE user='root';
+
+　　mysql> FLUSH PRIVILEGES;

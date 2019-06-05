@@ -1,0 +1,22 @@
+mysqldump：
+
+        1、导出整个数据库结构和数据 ：mysqldump -h localhost -uroot -p123456 database > dump.sql
+
+        2、导出单个数据表结构和数据：mysqldump -h localhost -uroot -p123456  database table > dump.sql
+
+        3、导出整个数据库结构（不包含数据）：mysqldump -h localhost -uroot -p123456  -d database > dump.sql
+
+        4、导出单个数据表结构（不包含数据）：mysqldump -h localhost -uroot -p123456  -d database table > dump.sql
+
+        5、导出整个数据库结构（只包含数据）：mysqldump -h localhost -uroot -p123456  -t database > dump.sql
+
+        6、导出单个数据表结构（只包含数据）：mysqldump -h localhost -uroot -p123456  -t database table > dump.sql
+
+       关于mysqldump 命令还有两点想补充一下：1、mysqldump 和mysql 命令是一样的，可以直接在控制台操作，这也是自己在备份数据的时候一直报语法错误的原因。2、不建议直接在命令中拼接密码，可以先用-p,按enter之后再输入正式的密码。
+
+总结：这个备份过程每一步都很简单，很清晰，终于不需要用数据库连接工具的一条条的插入数据了。有两点导致自己一直使用之前的低效备份方式。1、不知道mysql source 命令，2、自己的docker 太菜。
+---------------------
+作者：按不坏的CTRL
+来源：CSDN
+原文：https://blog.csdn.net/gxb2260/article/details/82715507
+版权声明：本文为博主原创文章，转载请附上博文链接！
