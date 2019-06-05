@@ -1,2 +1,3 @@
 java -version
 java -verbose :查看安装目录
+jar -jar 项目名.war

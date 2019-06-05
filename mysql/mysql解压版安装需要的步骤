@@ -1,0 +1,12 @@
+1. 配置my.imi文件，基本内容如下：
+
+
+2.同时需要以下指令
+  (1) mysqld -install
+  mysql安装
+
+  (2) mysqld --initialize-insecure --user=mysql
+   初始化化生成data文件和 root用户
+
+  (3)net start mysql
+  启动mysql
