@@ -1,0 +1,7 @@
+####1. 安装erlang 和rabbitmq
+  erlang需要配置系统变量才可安装
+  rabbit安装后需要执行指令安装对应插件：
+    rabbitmq-plugins.bat" enable rabbitmq_management   才可正常启动，
+    后如果能正常访问下面的地址就安装完成
+   http://localhost:15672
+####2.springboot整合mq的基本步骤
