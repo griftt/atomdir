@@ -2,11 +2,13 @@
 
 
 2.同时需要以下指令
-  (1) mysqld -install
-  mysql安装
-
-  (2) mysqld --initialize-insecure --user=mysql
+  在安装的目录下的bin目录下
+  (1)mysqld --initialize-insecure --user=mysql
    初始化化生成data文件和 root用户
+
+  (2) mysqld -install
+  mysql安装
 
   (3)net start mysql
   启动mysql
+3设置密码
