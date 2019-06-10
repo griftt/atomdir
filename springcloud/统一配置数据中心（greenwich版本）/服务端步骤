@@ -1,0 +1,48 @@
+####1.需要的依赖
+```java
+<dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+```
+####2.启动类上需要的注解
+```java
+@SpringBootApplication
+@EnableConfigServer
+@EnableDiscoveryClient
+```
+####3.yml文件的配置（最基本）
+```java
+spring:
+  application:
+    name: config  #根据这名字拿到配置文件
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/griftt/config-server.git
+          username: griftt
+          password: 1415wsh52000
+        force-pull: true #强制拉取
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8183
+
+```
+####5.需要注意的问题：

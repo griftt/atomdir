@@ -14,7 +14,7 @@ mysqladmin -u root password "newpass"
 mysqladmin -u root password oldpass "newpass"
 方法3： 用UPDATE直接编辑user表
 
-mysql -u root
+    mysql -u root
 
 　　mysql> use mysql;
 
