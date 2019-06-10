@@ -1,0 +1,8 @@
+####1./bus-refresh
+不起作用问题，需要先暴露该接口
+
+
+####2.请求 /bus-refresh 后文件已拉取但不生效问题，
+
+  1.需要refreshScope 需要确定刷新哪个配置
+  2.暴露接口后需要通过git或gitee上的webhook让他们在更新后向应用发送消息
