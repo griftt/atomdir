@@ -1,4 +1,4 @@
 java -version
 java -verbose :查看安装目录
 jar -jar 项目名.war
-java -jar target/eureka-server-0.0.1-SNAPSHOT.jar > /dev/null 2>&1 &   后台启动的账号
+nohup java -jar target/eureka-server-0.0.1-SNAPSHOT.jar > /dev/null 2>&1 &   后台启动

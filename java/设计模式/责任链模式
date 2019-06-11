@@ -1,0 +1,51 @@
+
+####1. 由多个处理环节组成的链条，每个环节有自己的处理逻辑，应用多态使各环节的简洁.
+####2. 代码实现
+  处理接口，以及处理实现 ，最后是链条的添加入口和执行入口
+统一处理接口
+```java
+public interface Process {
+
+    void doProcess(String msg);
+}
+
+
+```
+实现 ：略
+
+链条的添加和执行
+```java
+
+    /**
+     * 添加链条环节
+     * @param process
+     * @return
+     */
+    public ChainSupport addChain(Process process){
+            chainList.add(process);
+            return this;
+        }
+
+    /**
+     * 执行
+     * @param msg
+     * @return
+     */
+
+    public String go( String msg){
+            for (Process process:chainList) {
+                process.doProcess(msg);
+            }
+            return msg;
+        }
+
+    public static void main(String[] args) {
+        ChainSupport chainSupport = new ChainSupport().addChain(new TypeChain())
+                .addChain(new CopyRight());
+        String hello = chainSupport.go("hello");
+        System.out.println(hello);
+    }
+}
+
+
+```
