@@ -5,3 +5,20 @@
     后如果能正常访问下面的地址就安装完成
    http://localhost:15672
 ####2.springboot整合mq的基本步骤
+
+  yml文件配置
+  spring:
+  ##  application:
+  ##    name: eureka-product
+  ##  datasource:
+  ##    username: root
+  ##    password: 123456
+  ##    url: jdbc:mysql://localhost:3306/eureka?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+  ##    driver-class-name: com.mysql.jdbc.Driver
+  ##  jpa:
+  ##    show-sql: true
+  ##  rabbitmq:
+  ##    username: admin
+  ##    password: 123456
+  ##    host: localhost
+  ##    port: 5672
