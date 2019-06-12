@@ -9,7 +9,6 @@
         QueryWrapper<Sysparam> wrapper = new QueryWrapper<>();
         wrapper.eq("param_key", key)
                 .eq("record_status", ApplicationConstant.recordStatus.normal);
-
         return this.getOne(wrapper);
     }
     ```java
@@ -19,6 +18,4 @@ key:相当于该缓存内数据的key，
 key规则如下：
         - 使用方法参数作为key,多个参数用 '_' 隔开，如："#参数名_#参数名"
 ![key 可选参数类型](images/2019/05/20180807164005629.png)
-
-
 3.

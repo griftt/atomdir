@@ -1,0 +1,14 @@
+1.####使用了该注解的方法，都具有事务的特性。即对应的ACID特性。
+2.####用法
+  隔离性 isolation:  对应四个隔离性，这个参数有相应的枚举Isolation
+  传播行为
+  rollbackFor 回滚异常类型：
+  demo:
+3.####常见问题
+ （1）同类中事务不生效问题  ：
+     解决方法：
+       使用如下代码调用自己的另一个同类的事务方法。
+       ```java
+       CityServiceImpl proxy=(CityServiceImpl)AopContext.currentProxy();
+       ```
+  (2)原因： spring代理对象的问题。
