@@ -6,7 +6,7 @@
   String profile = context.getEnvironment().getActiveProfiles()[0]; //获取到当前环境
 
  ```
- 2.####通过@profile实现根据环境的不同做配置。
+ 2. ####通过@profile实现根据环境的不同做配置。
   @profile
   ```java
   @Configuration
@@ -45,5 +45,5 @@ public class Test4_UsingProfile {
     public void test3() {
         action.execute("wushuohanaaaaaa");
     }
-}  
+}
   ```
