@@ -1,5 +1,8 @@
+
+
+
 ###各类定时 demo
-```
+```java
 "0 0 12 * * ?" 每天中午12点触发
 "0 15 10 ? * *" 每天上午10:15触发
 "0 15 10 * * ?" 每天上午10:15触发
@@ -23,4 +26,22 @@
 每月1号凌晨1点执行一次：0 0 1 1 * ?
 每月最后一天23点执行一次：0 0 23 L * ?
 每周星期天凌晨1点实行一次：0 0 1 ? * L
+
+
+@Slf4j
+@Component
+public class AutoMergeJob {
+    @Autowired
+    MergeService mergeService;
+    /**
+     * 10分钟执行一次
+     */
+    @Scheduled(fixedRate = 10 * 1000 * 60)
+    public void autoMerge(){
+        log.info("AutoMergeJob - autoMerge begin.");
+        //当前拼单数少于5个时，自动发起3个拼单
+        mergeService.insertAutoMergeList(5,3);
+        log.info("AutoMergeJob - autoMerge end.");
+    }
+}
 ```
