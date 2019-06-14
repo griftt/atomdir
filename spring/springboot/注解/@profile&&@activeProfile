@@ -30,7 +30,7 @@ public class ProfileConfig {
         return new LowerAction();
     }
   ```
-  @acticeprofile
+  @ActiveProfile
   用于在测试中使用，指定某个环境
   ```java
   @RunWith(SpringJUnit4ClassRunner.class)
