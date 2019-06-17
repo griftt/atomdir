@@ -21,14 +21,14 @@
 ####2.启动类上需要的注解
 ```java
 @SpringBootApplication
-@EnableConfigServer
+@EnableConfigServer   #配置中心
 @EnableDiscoveryClient
 ```
 ####3.yml文件的配置（最基本）
 ```java
 spring:
   application:
-    name: config  #根据这名字拿到配置文件
+    name: config  #其他应用根据这名字找他
   cloud:
     config:
       server:
@@ -42,7 +42,14 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 server:
-  port: 8183
+  port: 8183  、
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"   #需要暴露的bus-fresh 接口
 
 ```
 ####5.需要注意的问题：
+@refreshScope:  在需要刷新配置的地方加上这个类注解，否则出现文件更新后，通知也发送成功了，但是配置却没有
+及时刷新的情况

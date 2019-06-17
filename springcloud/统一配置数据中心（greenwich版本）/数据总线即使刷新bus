@@ -1,0 +1,13 @@
+####一. 使用git的webhook刷新项目的配置文件
+   1. #####在存放配置文件的git仓库的webhook上配置通知的接口
+   -http://e6u35d.natappfree.cc/actuator/bus-refresh
+   本地的话需要做内网穿透
+
+  2.  ##### 服务端需要在yml文件加的配置 ,暴露bus-refresh接口,使其能收到git发送的通知
+  ```java
+management:
+  endpoints:
+    web:
+      exposure:
+        include:  bus-refresh # 暴露bus-refresh为了接到通知
+  ```

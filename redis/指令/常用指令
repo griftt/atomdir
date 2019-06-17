@@ -6,6 +6,12 @@ windows安装reis
 
 windows将redis配成服务：  redis-server --service-install redis.windows-service.conf --loglevel verbose，
 
+设置密码： reis -cli 进入
+1.    config get requirepass //获取当前密码
+　　config set requirepass "yourpassword"//设置当前密码,服务重新启动后又会置为默认，即无密码；不建议此种方式
+2.
+
+再次进入  redis-cli.exe -h 127.0.0.1 -p 6379 -a 123456 //需添加密码参数
 
 卸载服务：redis-server --service-uninstall
 

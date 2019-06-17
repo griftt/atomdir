@@ -1,0 +1,75 @@
+1.在git上新建yml文件,包含一些配置信息
+注意名字需要为  ：
+应用名-环境名.yml
+应用名.yml
+```java
+env: new1
+server:
+  port: 8181
+spring:
+  application:
+    name: order
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: 123456
+    url: jdbc:mysql://localhost:3306/eureka?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+    username: root
+  jpa:
+    show-sql: true
+  rabbitmq:
+    host: localhost
+    password: guest
+    port: 5672
+    username: guest
+```
+2.将项目的yml文件名改为bootstrap.yml，且需包含以下基本信息
+    （1）服务的注册地址
+    （2）配置中心的名字
+    （3）暴露bus-refresh接口
+
+```java
+spring:
+  application:
+    name: product
+  cloud:
+    config:  #配置中心需要
+      discovery:
+        enabled: true
+        service-id: config
+      profile: dev
+      label: master
+    stream:  #整合steam
+      bindings:
+        myOutput:
+          destination: mex  #绑定交换机
+        myInput:
+          destination: mex
+          group: product-in #分组
+          content-type: application/json  #将消息json显示在监控台
+#    rabbit:
+#      bindings:
+#        myOutput:
+#          producer:
+#            ttl: 3000 #消息3秒不消费转入私信队列
+#            autoBindDlq: true #启动私信队列
+#            deadLetterExchange: myInput #绑定exchange
+#            deadLetterQueueName: myInput.product-in #死信队列名字：exchanName.queueName
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/  #服务中心的地址
+management:
+  endpoints:
+    web:
+      exposure:
+        include:  bus-refresh # 暴露bus-refresh为了接到通知
+```
+3.maven依赖
+```java
+ <!--统一配置中心的客户端-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-client</artifactId>
+        </dependency>
+```
