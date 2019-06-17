@@ -1,0 +1,4 @@
+#####1.stream用于在消息与消息间提供沟通的桥梁  （Binder）
+目前支持ide消息有qabbitmq与kafaka
+
+#####2.基本使用
