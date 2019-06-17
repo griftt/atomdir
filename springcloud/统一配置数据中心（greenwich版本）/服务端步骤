@@ -51,5 +51,7 @@ management:
 
 ```
 ####5.需要注意的问题：
-@refreshScope:  在需要刷新配置的地方加上这个类注解，否则出现文件更新后，通知也发送成功了，但是配置却没有
+@refreshScope:  在需要刷新配置的地方加上这个类注解，否则出现文件更新后，通知也发送成功了，但是客户端配置却没有
 及时刷新的情况
+@EnableFeignClients(basePackages = "com.griftt.common")  ：
+多模块汇总要是指定feign包的扫描路径，否则注入feign的类时会报找不到对应的bean  
