@@ -1,4 +1,99 @@
 #####1.stream用于在消息与消息间提供沟通的桥梁  （Binder）
-目前支持ide消息有qabbitmq与kafaka
+目前支持的消息有rabbitmq与kafaka,，用于在应用于消息间的无感知。
 
 #####2.基本使用
+(1)maven依赖
+```java
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+        </dependency>
+```
+(2)yml文件的配置
+
+>
+stream:   #整合steam
+
+      bindings:
+        myOutput:  #生产者
+          destination: mex  #绑定交换机
+        myInput: #消费者
+          destination: mex
+          group: product-in #分组,
+          content-type: application/json  #将消息json显示在监控台
+  >
+(3).代码实例
+```java
+定义一个生产者和消费者
+public interface StreamClient {
+
+
+    String Input="myInput";
+    String Return="myreturnIN";
+    String ReturnOut="myreturnOUt";
+    String OutPut="myOutput";
+
+    /**
+     *
+     * 消费者
+     * @return
+     */
+    @Input(Input)
+    SubscribableChannel inputMsg();
+
+    /**
+     * 生产者
+     * @return
+     */
+    @Output(OutPut)
+    MessageChannel outputMsg();
+
+    //监听消费者返回的信息
+    @Input(Return)
+    SubscribableChannel inputMsg2();
+
+    //
+    @Output(ReturnOut)
+    MessageChannel outputMsg2();
+
+}
+
+发送消息
+@EnableBinding(StreamClient.class)
+@Slf4j
+@Component
+public class StreamReceiver {
+
+    /**
+     * 发送消息
+     * @param msg
+     * @return
+     */
+    @StreamListener(StreamClient.Input)
+    @SendTo(StreamClient.Return) //处理消息后返回信息,返回信息为： true
+    public boolean process(Object msg){
+        System.err.println(msg);
+       log.info("msg1：{}",msg);
+       return true;
+    }
+
+
+    /**
+     * 对消息处理后的确认的返回
+     * @param msg
+     */
+    @StreamListener(StreamClient.Return)
+    public void processReturn(Object msg){
+        System.err.println(msg);
+        log.info("msg return ：{}",msg);
+
+    }
+}
+```
+####4，**需要注意的问题**
+1.@Input与@Output:的值不能同名，否则无法启动
+2.yml文件需要配置destination: exchangeName  ,即需要绑定相应的交换机，否则消息无法发送
