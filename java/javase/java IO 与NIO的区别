@@ -35,7 +35,7 @@ Socket.send(socket, buf, len);
 ###nio与io的区别就是数据拷贝次减少为：3次,甚至两次。
 
 #### 一.java nio
-##### 1.java io为异步阻塞io,他的读取过程为以下几个步骤：
+##### 1.java io为同步非阻塞io,他的读取过程为以下几个步骤：
   (1)首先nio之所以比较快的原因是使用了zerocopy的技术，如图：。
   ![zorecopy 传输](images/2019/06/zorecopy-传输.png)
 
