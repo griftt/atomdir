@@ -6,9 +6,9 @@ java nio（同步非阻塞）的基本原理：可用一个线程或者少量线
 这些是Java NIO中最重要的通道的实现：
 
 FileChannel
-DatagramChannel
-SocketChannel
-ServerSocketChannel
+DatagramChannel： udp
+SocketChannel  ：tcp客户端
+ServerSocketChannel ：tcp服务端
 FileChannel 从文件中读写数据。
 
 DatagramChannel 能通过UDP读写网络中的数据。
@@ -57,7 +57,12 @@ FloatBuffer
 IntBuffer
 LongBuffer
 ShortBuffer
-常用方法：  flip(),clean（），rewind(), mark(), get()
+常用方法：
+ flip():buffer由写变为读
+  ,clear（）: 清除缓存取得内容，用于下次存储，
+  rewind()：将指针返回初始位置,
+   mark()： 用于在做标记，配合reset（）可让position会到标记位置
+    get()：获取一个字节
 
 3. #####  Scatter/Gather
 Java NIO开始支持scatter/gather，scatter/gather用于描述从Channel（译者注：Channel在中文经常翻译为通道）中读取或者写入到Channel的操作。
@@ -96,3 +101,8 @@ channel.write(bufferArray);
 
 buffers数组是write()方法的入参，write()方法会按照buffer在数组中的顺序，将数据写入到channel，注意只有position和limit之间的数据才会被写入。因此，如果一个buffer的容量为128byte，但是仅仅包含58byte的数据，那么这58byte的数据将被写入到channel中。因此与Scattering Reads相反，Gathering Writes能较好的处理动态消息。
 ```
+
+4. ##### Selector
+ 更像是一个通道管理器, 可以向其中注册各种通道，并且监听通道的各种状态，
+  Selector允许单个线程处理多个channel，可以将多个channel教给selector管理，并注册相应的事件，而selector则采用事件驱动的方式，当注册的事件就绪后，调用相应的相应的线程处理该时间，不用使用线程去维持长连接，减少了线程的开销。
+  IO的各种流是阻塞的。这意味着，当一个线程调用read() 或 write()时，该线程被阻塞，直到有一些数据被读取，或数据完全写入。该线程在此期间不能再干任何事情了。 NIO的非阻塞模式，使一个线程从某通道发送请求读取数据，但是它仅能得到目前可用的数据，如果目前没有数据可用时，就什么都不会获取。而不是保持线程阻塞，所以直至数据变得可以读取之前，该线程可以继续做其他的事情。 非阻塞写也是如此。一个线程请求写入一些数据到某通道，但不需要等待它完全写入，这个线程同时可以去做别的事情。 线程通常将非阻塞IO的空闲时间用于在其它通道上执行IO操作，所以一个单独的线程现在可以管理多个输入和输出通道（channel）。
