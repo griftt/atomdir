@@ -1,0 +1,115 @@
+ ####  一. spring cloud 引入zuul
+  1. maven依赖
+  ```java
+   <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <!--zuul-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-netflix-zuul</artifactId>
+            <version>2.1.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+            <version>2.1.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--actuator 用来监控和刷新-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-client</artifactId>
+        </dependency>
+    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+  ```
+2. #####  yml文件配置
+ ```java
+ spring:
+  application:
+    name: gateway
+  profiles:
+    active: dev
+  cloud:
+    config:  #配置中心需要
+      discovery:
+        enabled: true
+        service-id: config
+      profile: dev
+      label: master
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/  #服务中心的地址
+
+zuul: #自定义路由路径
+  routes:
+    prod: #可随便填
+      path: /prod/** #基础路由路径
+     serviceId: product #应用名
+    product: /prod/**  #简洁写法,所有product应用的请求，都可以用prod/** 代替
+    ignored-patterns:  - /prod/env/test2    #配置不被移动端调用的接口,可以是一个集合
+ ```
+ 4.过滤器的实现:
+ 前置过滤器的实现
+ ```java
+
+ @Component
+public class TokenFilter extends ZuulFilter {
+
+    @Override
+    public String filterType() {
+        return PRE_TYPE;
+    }
+
+    @Override
+    public int filterOrder() {
+
+        //前置过滤器一般在他（PRE_DECORATION_FILTER_ORDER）之前
+        return PRE_DECORATION_FILTER_ORDER-1;
+    }
+
+    @Override
+    public boolean shouldFilter() {
+        return true;
+    }
+
+    @Override
+    public Object run() throws ZuulException {
+        RequestContext currentContext = RequestContext.getCurrentContext();
+        HttpServletRequest request = currentContext.getRequest();
+        String token = request.getParameter("token");
+        if(token==null||"".equals(token)){
+            HttpServletResponse response = currentContext.getResponse();
+            currentContext.setSendZuulResponse(false);
+            currentContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
+        }
+        return null;
+    }
+}
+ ```
