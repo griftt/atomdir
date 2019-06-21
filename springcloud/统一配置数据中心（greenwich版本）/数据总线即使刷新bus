@@ -1,3 +1,4 @@
+
 ####一. 使用git的webhook刷新项目的配置文件
 #####   1. 在存放配置文件的git仓库的webhook上配置通知的接口
    -http://e6u35d.natappfree.cc/actuator/bus-refresh
@@ -56,7 +57,7 @@ public class WebHookFilter implements Filter {
   ```
     (2)对这个请求的内容做处理 ,如下为直接进无用的信息全部清理掉
 
-```java    
+```java
     public class CustometRequestWrapper extends HttpServletRequestWrapper {
 
     public CustometRequestWrapper(HttpServletRequest request) {
@@ -92,3 +93,12 @@ public class WebHookFilter implements Filter {
 
 }
     ```
+=======
+####1./bus-refresh
+不起作用问题，需要先暴露该接口
+
+
+####2.请求 /bus-refresh 后文件已拉取但不生效问题，
+
+  1.需要refreshScope 需要确定刷新哪个配置
+  2.暴露接口后需要通过git或gitee上的webhook让他们在更新后向应用发送消息
