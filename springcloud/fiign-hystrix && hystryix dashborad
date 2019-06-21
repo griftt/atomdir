@@ -1,5 +1,0 @@
-####  1.feign-hystrix
-feign里引入了hystrix.需要通过yml开启，
-feign:
-  hystrix:
-    enabled: true #k开启feign里的hystrix

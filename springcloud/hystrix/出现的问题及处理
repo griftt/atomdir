@@ -1,0 +1,30 @@
+#### 1. Feign报错'xx.FeignClientSpecification', defined in null, could not be registered.
+  feign同名引起的报错：  处理方法
+  ```java
+  服务调用方引入
+  spring:
+  main:
+    allow-bean-definition-overriding: true #用于解决 product.FeignClientSpecification', defined in null,在feign服务同名时产生
+  ```
+---------------------
+作者：Orcas阿晨
+来源：CSDN
+原文：https://blog.csdn.net/u012211603/article/details/84312709
+版权声明：本文为博主原创文章，转载请附上博文链接！
+
+
+#### 2.dashboard 可视化面板无法访问问题 Unable to connect to Command Metric Stream.
+  需要引入servlet
+  ```java
+    @Bean
+    public ServletRegistrationBean getServlet() {
+        HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();
+        ServletRegistrationBean registrationBean = new ServletRegistrationBean(streamServlet);
+        registrationBean.setLoadOnStartup(1);
+        registrationBean.addUrlMappings("/hystrix.stream");
+        registrationBean.setName("HystrixMetricsStreamServlet");
+        return registrationBean;
+    }
+  ```
+同时greenwich SR1的访问路径为：  http://localhost:8181/hystrix.stream
+而不是  http://localhost:8181/actuator/hystrix.stream

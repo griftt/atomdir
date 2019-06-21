@@ -1,0 +1,118 @@
+#### 1.hystrix 简介
+
+  maven依赖
+  ```java
+     <!--豪猪-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+
+启动类添加注解   @EnableCircuitBreaker
+
+/*@SpringBootApplication
+@EnableDiscoveryClient
+@EnableCircuitBreaker*/
+
+@SpringCloudApplication//代替上面三个
+
+最后在需要做熔断的方法加注解： @HystrixCommand(fallbackMethod = "fallBack")
+fallBack：为出现问题是执行的方法 ，该方法的返回值应与被注解方法返回类型一致。
+可用 @DefaultProperties(defaultFallback = "fallBack")，
+设置当前类的所有fallBack默认用 该方法
+  //默认的熔断返回
+@DefaultProperties(defaultFallback = "fallBack")
+public class OrderController {
+
+    @Autowired
+    private OrderService orderService;
+
+
+    @Autowired
+    private GoodsOrderFeignClient goodsOrderFeignClient;
+
+    @Autowired
+    private GoodsTestFeign goodsTestFeign;
+
+
+    public Goods fallBack(){
+        Goods goods = new Goods();
+        goods.setBatchNo("error");
+        return goods;
+    }
+    /**
+     * 服务降级不止用在服务端和还可用在自身，屏蔽各种异常，并向前端返回指定信息
+     * @return
+     */
+    //@HystrixCommand(fallbackMethod = "fallBack")
+    //服务降级超时时间默认为1秒
+    @HystrixCommand(commandProperties = {
+            @HystrixProperty(name ="execution.isolation.thread.timeoutInMilliseconds" ,value ="2000" )
+    })
+    @GetMapping("/goodsOne")
+    public Goods getOrderGoodsById(){
+        Goods goods = goodsOrderFeignClient.getGoodsById(99);
+        log.info("goods={}",goods);
+        return  goods;
+    }
+
+  ```
+
+  ##### 1.服务降级
+    ```java
+      /**
+     * 服务降级不止用在服务端和还可用在自身，屏蔽各种异常，并向前端返回指定信息
+     * @return
+     */
+    //@HystrixCommand(fallbackMethod = "fallBack")
+    //服务降级超时时间默认为1秒
+    @HystrixCommand(commandProperties = {
+            @HystrixProperty(name ="execution.isolation.thread.timeoutInMilliseconds" ,value ="2000" )
+    })
+    @GetMapping("/goodsOne")
+    public Goods getOrderGoodsById(){
+        Goods goods = goodsOrderFeignClient.getGoodsById(99);
+        log.info("goods={}",goods);
+        return  goods;
+    }
+    ```
+  ##### 2.服务超时
+```java
+
+    //服务降级超时时间默认为1秒
+    @HystrixCommand(commandProperties = {
+            @HystrixProperty(name ="execution.isolation.thread.timeoutInMilliseconds" ,value ="2000" )
+    })
+    @GetMapping("/goodsOne")
+    public Goods getOrderGoodsById(){
+        Goods goods = goodsOrderFeignClient.getGoodsById(99);
+        log.info("goods={}",goods);
+        return  goods;
+    }
+    ```
+  ##### 3.服务熔断
+  ```java
+  /**
+     * 測試服務熔斷
+     * @return
+     */
+      @HystrixCommand(commandProperties = {
+            @HystrixProperty(name ="circuitBreaker.enabled" ,value ="true" ),// 启动熔断器
+            @HystrixProperty(name ="circuitBreaker.requestVolumeThreshold" ,value ="10" ),//时间窗口内（默认时间内） 连续的请求次数
+            @HystrixProperty(name ="circuitBreaker.sleepWindowInMilliseconds" ,value ="5000" ),//指定某个时间窗口，休眠这个时间（5s）后变为半熔断状态，此时如果请求又是报错则又变为熔断状态，再次休眠5秒
+            @HystrixProperty(name ="circuitBreaker.errorThresholdPercentage" ,value ="60" )//默认时间内, 连续的请求次数的错误率
+    })
+    @GetMapping("/goodsTwo")
+    public Goods testBroker(Integer a){
+        if(a%2==0){
+            int b=a/0;
+        }
+        Goods goods = goodsOrderFeignClient.getGoodsById(99);
+        log.info("goods={}",goods);
+        return  goods;
+    }
+  ```
+
+  hystrix是线程池的隔离
+  为注解有hystrix的方法实现依赖隔离
+  依赖隔离

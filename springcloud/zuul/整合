@@ -84,6 +84,7 @@ public class TokenFilter extends ZuulFilter {
 
     @Override
     public String filterType() {
+    //确定类型为前置过滤器
         return PRE_TYPE;
     }
 
