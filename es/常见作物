@@ -1,0 +1,19 @@
+[1]: max file descriptors [4096] for elasticsearch process is too low, increase to at least [65536]
+切换到root用户，编辑limits.conf添加如下内容
+vi /etc/security/limits.conf
+* soft nofile 65536
+* hard nofile 65536
+[2]: max number of threads [3818] for user [es] is too low, increase to at least [4096]
+最大线程个数太低。修改配置文件etc/security/limits.conf，增加配置
+* soft nproc 4096
+* hard nproc 4096
+[3]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+修改/etc/sysctl.conf文件，增加配置vm.max_map_count=262144
+vi /etc/sysctl.conf
+sysctl -p
+执行命令sysctl -p生效
+
+作者：徐大力Bear
+链接：https://www.jianshu.com/p/2285f1f8ec21
+来源：简书
+简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。

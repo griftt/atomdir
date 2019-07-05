@@ -45,5 +45,5 @@ public interface GoodsOrderFeignClient {
   ```java
   服务调用方引入
   spring:
-  main:
+   main:
     allow-bean-definition-overriding: true #用于解决 product.FeignClientSpecification', defined in null,在feign服务同名时产生
