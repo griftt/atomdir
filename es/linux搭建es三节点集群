@@ -11,7 +11,7 @@
 
 
   ### 二.master节点配置。
-    1.安装es7.2  wget
+    1.安装es7.2   wget
 
     2.修改es7.2的 elasticsearch.yml的network为
        ` network host 0.0.0.0 `
