@@ -1,0 +1,19 @@
+1.数据库引擎的区别
+    1.innodb支持事务
+    2.innodb支持行锁
+    3.innodb支持mvcc
+    4.innodb支持外键
+    5.myisam支持全文检索
+2.覆盖索引
+  可通过他直接拿到数据，前提是数据已被覆盖索引所包含，这是通过非聚集索引
+  直接拿到数据的一种方式。
+
+3.集合的扩容
+
+4.concurrentMap的分段锁
+  https://www.cnblogs.com/shan1393/p/9020564.html  
+分库分表
+多线程的锁
+常用的线程池
+可重复读的时做update的细节
+jvm new一个对象时的堆栈变化
