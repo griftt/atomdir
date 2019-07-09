@@ -1,0 +1,53 @@
+1.# 索引
+###通过命令查看 
+show index from tbname;
+MySQL通过SQL语句查看表的索引：
+1、查看数据库所有索引
+SELECT * FROM mysql.`innodb_index_stats` a WHERE a.`database_name` = '数据库名';
+
+2、查看某一表索引
+ SELECT * FROM mysql.`innodb_index_stats` a WHERE a.`database_name` = '数据库名' and a.table_name like '%表名%';
+### 删除
+```java
+drop index index_name on table_name ;
+
+alter table table_name drop index index_name ;
+
+alter table table_name drop primary key ;
+```
+### 添加索引
+```java
+  create只能添加这两种索引：
+
+  CREATE INDEX index_name ON table_name (column_list)
+  CREATE UNIQUE INDEX index_name ON table_name (column_list)
+alter
+ALTER TABLE 表名 ADD 索引类型 （unique,primary key,fulltext,index）[索引名]（字段名）
+//普通索引
+alter table table_name add index index_name (column_list) ;
+//唯一索引
+alter table table_name add unique (column_list) ; 列值可为null
+//主键索引
+alter table table_name add primary key (column_list)
+
+```
+
+---------------------
+作者：DBA之路
+来源：CSDN
+原文：https://blog.csdn.net/qq_35209838/article/details/85721229
+版权声明：本文为博主原创文章，转载请附上博文链接！
+
+  ##分类
+  > 聚集索引（主键索引一个表只能有一个）
+
+  > 普通索引
+
+  > 联合索引
+
+  > 唯一索引
+
+  > 覆盖索引（索引的覆盖）
+
+### 普通索引
+  sql: create index  索引名 on 表名（字段名(如果为txt,可指定长度 length)  ）
