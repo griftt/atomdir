@@ -14,7 +14,7 @@
     1.安装es7.2   wget
 
     2.修改es7.2的 elasticsearch.yml的network为
-       ` network host 0.0.0.0 `
+       ` network.host 0.0.0.0 `
     3.vim /etc/sysctl.conf   最后面添加： vm.max_map_count=262144  ：最大文件数 ，
      保存退出后， systcl -p :生效
     4. 修改允许打开的最大文件描述符数量 vim /etc/security/limits.conf

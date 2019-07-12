@@ -1,0 +1,5 @@
+1.查询CPU个数cat /proc/cpuinfo | grep physical  | sort -n | uniq | wc -l
+
+2.查询服务器型号dmidecode | grep "Product Name"或dmidecode -s system-product-name
+
+3.查看CPU几核cat /proc/cpuinfo  | grep physical | sort -n | uniq -c

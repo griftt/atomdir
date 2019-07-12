@@ -1,5 +1,6 @@
 参考链接  https://www.cnblogs.com/wunaozai/p/9928962.html
 https://blog.csdn.net/u011781521/article/details/80464826
+https://www.cnblogs.com/mxmbk/p/9969008.html
 ### 1. 首先启动单节点测试
 docker run -d --name es-main -p 9200:9200
 -e http.port=9200 -e network.host=0.0.0.0
@@ -40,3 +41,5 @@ docker run -p 9800:9800 -d --link es:demo containerize/elastichd
  (2)  WARNING: IPv4 forwarding is disabled. Networking will not work.
      更改 /etc/sysctl.conf中的“ net.ipv4.ip_forward=1”，默认其实是0.
      更改后执行“systemctl restart network”，再次启动elasticsearch则可以通过外网访问！
+  (3) 出现权限问题时，要在相应的挂载文件夹上，执行
+      - chown 1000:1000  文件目录名称     
