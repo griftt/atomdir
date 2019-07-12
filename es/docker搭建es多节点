@@ -42,4 +42,4 @@ docker run -p 9800:9800 -d --link es:demo containerize/elastichd
      更改 /etc/sysctl.conf中的“ net.ipv4.ip_forward=1”，默认其实是0.
      更改后执行“systemctl restart network”，再次启动elasticsearch则可以通过外网访问！
   (3) 出现权限问题时，要在相应的挂载文件夹上，执行
-      - chown 1000:1000  文件目录名称     
+      - chown 1000:1000  文件目录名称
