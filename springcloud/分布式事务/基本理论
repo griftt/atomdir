@@ -1,5 +1,5 @@
 参考链接：https://www.cnblogs.com/savorboard/p/distributed-system-transaction-consistency.html
-
+https://blog.csdn.net/u010425776/article/details/79516298
 ####cap理论 ：
 CAP定理是由加州大学伯克利分校Eric Brewer教授提出来的，他指出WEB服务无法同时满足一下3个属性：
 一致性(Consistency) ： 客户端知道一系列的操作都会同时发生(生效)
