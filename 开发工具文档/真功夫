@@ -1,0 +1,48 @@
+真功夫
+VPN：账号:candao-dev	密码:w|qXenvkKV;3$9q:Wo4I
+日志系统 
+QC真功夫查询日志地址（外网）:http://183.6.83.53:8088/#/log_res
+正式真功夫：日志系统：http://210.5.5.176:8088/?t=login&c=1#/login 
+
+QC
+ocrm http://183.6.83.53:606/	
+oprs http://183.6.83.53:607/	
+
+ocrm http://172.16.168.241:606	CD02291/hony/hony123456
+oprs http://172.16.168.241:607	jone/123456a
+boms  http://172.16.168.241:603/login.html
+
+
+生产
+http://gfs-oprs6.kungfudingcan.com:82/    oprs访问	jone/123456a
+http://gfs-ocrm6.kungfudingcan.com:81/    ocrm访问	CD02291/nicole/cd201912041049
+http://gfs-boms6.kungfudingcan.com:83/	boms
+http://172.16.106.45:83/            api-gateway
+http://172.16.106.45:84/            entry-zt
+接口请求地址：172.16.106.45:8085
+
+172.16.106.28/datacenter_release/candao_user/candao_user_ZKungFu_2019
+真功夫正式环境的新版本xxl-job：
+地址：http://172.16.106.25:8018
+账号：admin
+密码：123456
+
+
+餐道项目组的 VPN账号：
+ 
+账号 密码 有效期 备注
+candao-OP 9@/;kRG6/I#@"20l7Mi& 2020/12/31 部署
+candao-dev w|qXenvkKV;3$9q:Wo4I 2019/12/31 开发
+
+堡垒机地址
+https://172.16.100.72/
+帐密：lianyuan.liu / lly364334840
+
+服务器帐密：
+root FHijgov509srnf#XzDqI
+zkfadmin EPO6plV9M28PMKjDGLU&
+
+测试服务器
+root
+D9hh22oCABkZM0afE5iF
+

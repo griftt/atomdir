@@ -1,0 +1,105 @@
+日志账号：
+qc:  http://10.200.102.125:8088/#/dashboard  candao  /CanDao#2019
+beta：http://10.200.102.126:8088/#/dashboard  candao  /CanDao#2019
+
+
+beta->oprs
+jesse
+123456Aa
+
+
+
+预发布环境：
+商家编号 CD02087
+账号:griftt
+密码:grifttTest123
+
+
+oprs营运后台:http://oprs6.can-dao.com 账号:griftt 密码:201909242046
+老乡鸡oprs :jone /123456a
+
+正式环境：
+======================
+正式oc  coco商家账号
+商家编号 CD02562
+账号:grifttwu
+密码:Of4cWuwnf9
+
+
+商家编号 CD02562
+账号:griftt
+密码:Aa0EisvHTj
+
+ocrm : 
+商家编号 CD02001
+账号:griftt
+密码:grifttTest123
+boms:
+ 商家Id:CD02001 登录账号:grifttwu 用户名:griftt 密码:201909242055
+ 商家Id:CD02001 登录账号:grifttBoms 用户名:grifttBoms 密码:grifttTest123
+
+正式的测试账号：ocrm-oc: 
+商家编号 ： CD02778
+账号:griftt
+密码:grifttTest123
+
+
+
+
+另外我们B环境的网关内网地址192.168.20.250:81 A环境的网关内网地址：192.168.20.209:81 ，
+公共的网关内网地址：192.168.20.75:81，外网地址：http://119.3.48.220:81/
+dc调用api项目使用内网elb地址：192.168.20.12  
+
+
+qc:xin零售商家编号 CD00689
+账号:griftt
+密码grifttTest
+
+新零售测试运营商3
+商家编号 CD02454
+账号:griftt
+grifttTest123
+
+
+CD00093  
+griftt
+ 
+qc新账号：
+商家编号 CD00315
+账号:griftt
+密码:fR3HVSM0e0
+
+qc新零售
+商家编号 CD00318
+账号:griftt
+密码:N6q0S6HFA6
+
+qc美团新账号：
+商家编号 CD00003
+账号:griftt
+密码:grifttTest123
+
+
+beta新零售
+商家编号 CD02128
+账号:griftt
+密码:2yNqTBOBW4
+
+
+
+商家编号 CD02088
+账号:candaogriftt
+密码:cd202003301122
+
+合兴集团
+商家编号 CD02417
+账号:griftt
+密码:Ea14eXV1r2
+
+
+
+
+bate 中台商家编号：
+CD02002
+griftt
+grifttTest123
